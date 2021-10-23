@@ -18,9 +18,9 @@ logger = logging.getLogger('example_logger')
 def colorise(data):
     try:
         logger.warning(f"GOT {data['path']}")
-        img = load_img(data["path"])
+        img = load_img("/imgs/"+data["path"])
     except:
-        logger.warning(f"COULD NOT OPEN FILE {data['path']}")
+        logger.warning(f"COULD NOT OPEN FILE /imgs/{data['path']}")
         return json.dumps(http.HTTPStatus.BAD_REQUEST, ensure_ascii=False).encode('utf8')
 
     (tens_l_orig, tens_l_rs) = preprocess_img(img, HW=(256, 256))

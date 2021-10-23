@@ -26,14 +26,13 @@ RUN apt-get update \
   && apt-get --yes install git \
   && apt-get --yes install wget
 
-
+RUN wget https://colorizers.s3.us-east-2.amazonaws.com/colorization_release_v2-9b330a0b.pth -O colorization_release_v2-9b330a0b.pth
 
 ADD . .
 
 WORKDIR /
 RUN mkdir -p /imgs/colorised
 
-RUN wget https://colorizers.s3.us-east-2.amazonaws.com/colorization_release_v2-9b330a0b.pth -O colorization_release_v2-9b330a0b.pth
 EXPOSE 2020
 
 RUN pip install --no-cache-dir -r requirements.txt
