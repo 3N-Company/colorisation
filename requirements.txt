@@ -1,6 +1,9 @@
+flask~=2.0.2
 torch
 scikit-image
 numpy
 matplotlib
-argparse
-PIL
+Pillow
+gunicorn
+IPython
+jupyter

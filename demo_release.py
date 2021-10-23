@@ -1,21 +1,25 @@
-
-import argparse
 import os.path
-
 import matplotlib.pyplot as plt
 
 from colorizers import *
 import http
-from flask_cors import CORS, cross_origin
+# from flask_cors import CORS, cross_origin
 from flask import request, Flask, Response, jsonify, abort
-import pandas as pd
 import json
 
 
 app = Flask(__name__)
 
+
+
+
+# def get_weights():
+global colorizer_eccv16
+colorizer_eccv16 = eccv16(pretrained=True).eval()
+
+
 def colorise(data):
-    colorizer_eccv16 = eccv16(pretrained=True).eval()
+
     try:
         img = load_img(data["path"])
     except:
@@ -36,13 +40,16 @@ def colorise(data):
 
 
 @app.route('/colorised', methods=['POST'])
-def main():
+def coloriseee():
     data = request.get_json()
     ret = colorise(data)
 
     return ret
 
 
+
 if __name__ == '__main__':
+    # col = Coloriser()
+    # get_weights()
     app.run('0.0.0.0', port=2020)
 
