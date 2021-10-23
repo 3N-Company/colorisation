@@ -98,8 +98,12 @@ class ECCVGenerator(BaseColor):
         return self.unnormalize_ab(self.upsample4(out_reg))
 
 def eccv16(pretrained=True):
-	model = ECCVGenerator()
-	if(pretrained):
-		import torch.utils.model_zoo as model_zoo
-		model.load_state_dict(model_zoo.load_url('https://colorizers.s3.us-east-2.amazonaws.com/colorization_release_v2-9b330a0b.pth',map_location='cpu',check_hash=True))
-	return model
+    model = ECCVGenerator()
+    if(pretrained):
+        import torch.utils.model_zoo as model_zoo
+        model.load_state_dict(torch.load("colorization_release_v2-9b330a0b.pth",map_location='cpu'))
+        # model = torch.load("colorization_release_v2-9b330a0b.pth",map_location='cpu')
+
+        # model.load_state_dict(model_zoo.load_url('https://colorizers.s3.us-east-2.amazonaws.com/colorization_release_v2-9b330a0b.pth',map_location='cpu',check_hash=True))
+    return model
+

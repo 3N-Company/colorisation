@@ -21,8 +21,10 @@ colorizer_eccv16 = eccv16(pretrained=True).eval()
 def colorise(data):
 
     try:
+        print(f"GOT {data['path']}")
         img = load_img(data["path"])
     except:
+        print(f"COULD NOT OPEN FILE {data['path']}")
         return json.dumps(http.HTTPStatus.BAD_REQUEST, ensure_ascii=False).encode('utf8')
 
     (tens_l_orig, tens_l_rs) = preprocess_img(img, HW=(256, 256))
@@ -30,10 +32,11 @@ def colorise(data):
     out_img_eccv16 = postprocess_tens(tens_l_orig, colorizer_eccv16(tens_l_rs).cpu())
 
     try:
+        print(f"TRYING TO SAVE /imgs/colorised/{os.path.basename(data['path'])}")
         plt.imsave(f"/imgs/colorised/{os.path.basename(data['path'])}", out_img_eccv16)
         return json.dumps(http.HTTPStatus.OK, ensure_ascii=False).encode('utf8')
     except:
-
+        print(f"Could not save  ./imgs/colorised/{os.path.basename(data['path'])}")
         return json.dumps(http.HTTPStatus.BAD_REQUEST, ensure_ascii=False).encode('utf8')
 
 
