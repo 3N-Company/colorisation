@@ -30,7 +30,7 @@ def colorise(data):
     out_img_eccv16 = postprocess_tens(tens_l_orig, colorizer_eccv16(tens_l_rs).cpu())
 
     try:
-        plt.imsave(f"imgs/colorised/{os.path.basename(data['path'])}", out_img_eccv16)
+        plt.imsave(f"/imgs/colorised/{os.path.basename(data['path'])}", out_img_eccv16)
         return json.dumps(http.HTTPStatus.OK, ensure_ascii=False).encode('utf8')
     except:
 
